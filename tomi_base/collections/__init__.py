@@ -89,3 +89,10 @@ def expand(obj, sep=None, idx_marker=None):
         obj = new_obj
 
     return dict_to_array(unflatten(obj))
+
+
+def flatten_lists(lst):
+    def iterable(v):
+        return isinstance(v, Iterable) and not type(v) == str
+
+    return [val for sub in [v for v in lst if iterable(v)] for val in sub] + [val for val in lst if not iterable(val)]
